@@ -1,2 +1,1 @@
-# matrix-c
-A library in C for Matrixes
+This a simple matrix library in C
