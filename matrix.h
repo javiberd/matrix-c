@@ -11,7 +11,7 @@ void    set   (Matrix *matrix,
                int     j,
                int     value);
 
-void    get   (Matrix *matrix,
+int     get   (Matrix *matrix,
                int     i,
                int     j);
 
