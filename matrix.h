@@ -1,3 +1,7 @@
+/**
+  Author: Javier Berdecio Trigueros
+*/
+
 #ifndef MATRIX_H_
 #define MATRIX_H_
 
@@ -37,7 +41,8 @@ void    sub   (Matrix *matrix_1,
                Matrix *matrix_2);
 
 /**
-  Multiplies matrix_1 and matrix_2 and then returns that matrix
+  Multiplies matrix_1 and matrix_2 with the naive method and then returns
+  that matrix
 */
 Matrix *mul   (Matrix *matrix_1,
                Matrix *matrix_2);

@@ -1,3 +1,7 @@
+/**
+  Author: Javier Berdecio Trigueros
+*/
+
 #include "matrix.h"
 
 #include <stdlib.h>
@@ -13,12 +17,12 @@ struct _Matrix
 
 void init (Matrix **matrix, int rows, int cols)
 {
-  (*matrix) = (Matrix *) malloc (sizeof(Matrix));
+  (*matrix) = (Matrix *) malloc (sizeof (Matrix));
   (*matrix)->rows = rows;
   (*matrix)->cols = cols;
-  (*matrix)->mat = (int**) malloc (sizeof(int *) * rows);
+  (*matrix)->mat = (int**) malloc (sizeof (int *) * rows);
   for (int i = 0; i < rows; i++) {
-    (*matrix)->mat[i] = (int*) malloc (sizeof(int) * cols);
+    (*matrix)->mat[i] = (int*) malloc (sizeof (int) * cols);
   }
 }
 
@@ -56,7 +60,22 @@ void sub(Matrix *matrix_1, Matrix *matrix_2)
 
 Matrix *mul (Matrix *matrix_1, Matrix *matrix_2)
 {
-  Matrix *res = NULL;
+  int i, j, k;
+  int rows1 = matrix_1->rows, cols1 = matrix_1->cols, cols2 = matrix_2->cols;
+  Matrix *res;
+  int **mat_1, **mat_2, **res_mat;
+  init (&res, rows1, cols2);
+  mat_1 = matrix_1->mat;
+  mat_2 = matrix_2->mat;
+  res_mat = res->mat;
+  for (i = 0; i < rows1; i++) {
+    for (j = 0; j < cols2; j++) {
+        res_mat[i][j] = 0;
+      for (k = 0; k < cols1; k++) {
+        res_mat[i][j] += mat_1[i][k] * mat_2[k][j];
+      }
+    }
+  }
   return res;
 }
 
@@ -64,7 +83,7 @@ char *str(Matrix *matrix)
 {
   int i, j;
   int rows = matrix->rows, cols = matrix->cols;
-  char *out = (char *) malloc(sizeof(char) * rows * cols);
+  char *out = (char *) malloc(sizeof (char) * rows * cols);
   char aux[10];
   for (i = 0; i < rows; i++) {
     for (j = 0; j < cols; j++) {
@@ -78,8 +97,8 @@ char *str(Matrix *matrix)
 
 void del(Matrix *matrix)
 {
-  int i, size = matrix->cols;
-  for (i = 0; i < size; i++) {
+  int i, rows = matrix->rows;
+  for (i = 0; i < rows; i++) {
     free (matrix->mat[i]);
   }
   free (matrix->mat);
