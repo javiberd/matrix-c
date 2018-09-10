@@ -29,15 +29,27 @@ int     get   (Matrix *matrix,
                int     i,
                int     j);
 /**
-  Adds matrix_2 to matrix_1
+  Adds matrix_2 to matrix_1, result is saved in matrix_1
 */
 void    add   (Matrix *matrix_1,
+               Matrix *matrix_2)
+
+/**
+  Adds matrix_2 to matrix_1, result is returned
+*/
+Matrix *addc  (Matrix *matrix_1,
                Matrix *matrix_2);
 
 /**
-  Subtracts matrix_2 to matrix_1
+  Subtracts matrix_2 to matrix_1, result is saved in matrix_1
 */
 void    sub   (Matrix *matrix_1,
+               Matrix *matrix_2);
+
+/**
+  Subtracts matrix_2 to matrix_1, result is returned
+*/
+Matrix *subc  (Matrix *matrix_1,
                Matrix *matrix_2);
 
 /**

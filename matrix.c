@@ -47,7 +47,21 @@ void add (Matrix *matrix_1, Matrix *matrix_2)
   }
 }
 
-void sub(Matrix *matrix_1, Matrix *matrix_2)
+Matrix *addc (Matrix *matrix_1, Matrix *matrix_2)
+{
+  int i, j;
+  int rows = matrix_1->rows, cols = matrix_1->cols;
+  Matrix *res;
+  init(res, rows, cols);
+  for (i = 0; i < rows; i++) {
+    for (j = 0; j < cols; j++) {
+      res->mat[i][j] = matrix_1->mat[i][j] + matrix_2->mat[i][j];
+    }
+  }
+  return res;
+}
+
+void sub (Matrix *matrix_1, Matrix *matrix_2)
 {
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
@@ -56,6 +70,20 @@ void sub(Matrix *matrix_1, Matrix *matrix_2)
       matrix_1->mat[i][j] = matrix_1->mat[i][j] - matrix_2->mat[i][j];
     }
   }
+}
+
+Matrix *subc (Matrix *matrix_1, Matrix *matrix_2)
+{
+  int i, j;
+  int rows = matrix_1->rows, cols = matrix_1->cols;
+  Matrix *res;
+  init(res, rows, cols);
+  for (i = 0; i < rows; i++) {
+    for (j = 0; j < cols; j++) {
+      res->mat[i][j] = matrix_1->mat[i][j] - matrix_2->mat[i][j];
+    }
+  }
+  return res;
 }
 
 Matrix *mul (Matrix *matrix_1, Matrix *matrix_2)
