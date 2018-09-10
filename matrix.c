@@ -107,23 +107,37 @@ Matrix *mul (Matrix *matrix_1, Matrix *matrix_2)
   return res;
 }
 
-char *str(Matrix *matrix)
+int equals (Matrix *matrix_1, Matrix *matrix_2)
+{
+  int i, j;
+  int rows = matrix_1->rows, cols = matrix_1->cols;
+  for (i = 0; i < rows; i++) {
+    for (j = 0; j < cols; j++) {
+      if (matrix_1->mat[i][j] != matrix_2->mat[i][j]) {
+        return 0;
+      }
+    }
+  }
+  return 1;
+}
+
+char *str (Matrix *matrix)
 {
   int i, j;
   int rows = matrix->rows, cols = matrix->cols;
-  char *out = (char *) malloc(sizeof (char) * rows * cols);
+  char *out = (char *) malloc (sizeof (char) * rows * cols);
   char aux[10];
   for (i = 0; i < rows; i++) {
     for (j = 0; j < cols; j++) {
-      sprintf(aux, "%i", matrix->mat[i][j]);
-      strcat(out, aux);
+      sprintf (aux, "%i", matrix->mat[i][j]);
+      strcat (out, aux);
     }
-    strcat(out, "\n");
+    strcat (out, "\n");
   }
   return out;
 }
 
-void del(Matrix *matrix)
+void del (Matrix *matrix)
 {
   int i, rows = matrix->rows;
   for (i = 0; i < rows; i++) {

@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main ()
 {
   Matrix *m1, *m2, *m3;
   init (&m1, 3, 3);
@@ -32,4 +32,12 @@ int main()
   del (m2);
   del (m3);
   return 0;
+}
+
+void test_addc () {
+
+}
+
+void test_subc () {
+
 }
