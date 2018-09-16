@@ -26,6 +26,20 @@ void init (Matrix **matrix, int rows, int cols)
   }
 }
 
+void init (Matrix **matrix, int **mat, int rows, int cols)
+{
+  (*matrix) = (Matrix *) malloc (sizeof (Matrix));
+  (*matrix)->rows = rows;
+  (*matrix)->cols = cols;
+  (*matrix)->mat = (int**) malloc (sizeof (int *) * rows);
+  for (int i = 0; i < rows; i++) {
+    (*matrix)->mat[i] = (int*) malloc (sizeof (int) * cols);
+    for (int j = 0; j < cols; j++) {
+      (*matrix)->mat[i][j] = mat[i][j];
+    }
+  }
+}
+
 void set (Matrix *matrix, int i, int j, int value)
 {
   matrix->mat[i][j] = value;

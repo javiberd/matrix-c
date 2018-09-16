@@ -13,6 +13,13 @@ typedef struct _Matrix Matrix;
 void    init   (Matrix **matrix,
                 int      rows,
                 int      cols);
+/**
+  Initiliazes a rows * cols matrix, mat is copied into the new matrix
+*/
+void    init  (Matrix **matrix,
+                int    **mat,
+                int      rows,
+                int      cols);
 
 /**
   Sets value of position (i, j) of the matrix to the parameter 'value'
@@ -59,6 +66,10 @@ Matrix *subc   (Matrix *matrix_1,
 Matrix *mul    (Matrix *matrix_1,
                 Matrix *matrix_2);
 
+/**
+  Compares two matrices, 1 is returned if both represent the same matrix. 0, if
+  both represent different matrices
+*/
 int     equals (Matrix *matrix_1,
                 Matrix *matrix_2);
 
