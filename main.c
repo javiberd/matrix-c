@@ -105,6 +105,8 @@ int main ()
   }
 
   // Operation addc
+  // Reinitialize matrix 1 because it has changed after last operation
+  init (&m1, 5, 4, m1_t1_mat);
   if (test (OP_ADDC, m1, m2, res_add) == 1) {
     printf ("addc test 1 passed\n");
   }
@@ -121,6 +123,8 @@ int main ()
   }
 
   // Operation subc
+  // Reinitialize matrix 1 because it has changed after last operation
+  init (&m1, 5, 4, m1_t1_mat);
   if (test (OP_SUBC, m1, m2, res_sub) == 1) {
     printf ("subc test 1 passed\n");
   }
