@@ -15,18 +15,7 @@ struct _Matrix
   int** mat;
 };
 
-void init (Matrix **matrix, int rows, int cols)
-{
-  (*matrix) = (Matrix *) malloc (sizeof (Matrix));
-  (*matrix)->rows = rows;
-  (*matrix)->cols = cols;
-  (*matrix)->mat = (int**) malloc (sizeof (int *) * rows);
-  for (int i = 0; i < rows; i++) {
-    (*matrix)->mat[i] = (int*) malloc (sizeof (int) * cols);
-  }
-}
-
-void init (Matrix **matrix, int **mat, int rows, int cols)
+void init (Matrix **matrix, int rows, int cols, int mat[rows][cols])
 {
   (*matrix) = (Matrix *) malloc (sizeof (Matrix));
   (*matrix)->rows = rows;
@@ -35,7 +24,12 @@ void init (Matrix **matrix, int **mat, int rows, int cols)
   for (int i = 0; i < rows; i++) {
     (*matrix)->mat[i] = (int*) malloc (sizeof (int) * cols);
     for (int j = 0; j < cols; j++) {
-      (*matrix)->mat[i][j] = mat[i][j];
+      if (mat != NULL) {
+        (*matrix)->mat[i][j] = mat[i][j];
+      }
+      else {
+        (*matrix)->mat[i][j] = 0;
+      }
     }
   }
 }
@@ -66,7 +60,7 @@ Matrix *addc (Matrix *matrix_1, Matrix *matrix_2)
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
   Matrix *res;
-  init(res, rows, cols);
+  init (&res, rows, cols, NULL);
   for (i = 0; i < rows; i++) {
     for (j = 0; j < cols; j++) {
       res->mat[i][j] = matrix_1->mat[i][j] + matrix_2->mat[i][j];
@@ -91,7 +85,7 @@ Matrix *subc (Matrix *matrix_1, Matrix *matrix_2)
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
   Matrix *res;
-  init(res, rows, cols);
+  init (&res, rows, cols, NULL);
   for (i = 0; i < rows; i++) {
     for (j = 0; j < cols; j++) {
       res->mat[i][j] = matrix_1->mat[i][j] - matrix_2->mat[i][j];
@@ -106,7 +100,7 @@ Matrix *mul (Matrix *matrix_1, Matrix *matrix_2)
   int rows1 = matrix_1->rows, cols1 = matrix_1->cols, cols2 = matrix_2->cols;
   Matrix *res;
   int **mat_1, **mat_2, **res_mat;
-  init (&res, rows1, cols2);
+  init (&res, rows1, cols2, NULL);
   mat_1 = matrix_1->mat;
   mat_2 = matrix_2->mat;
   res_mat = res->mat;

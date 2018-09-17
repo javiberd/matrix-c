@@ -6,14 +6,56 @@
 #include <stdlib.h>
 #include "matrix.h"
 
-typedef enum _Operations
+typedef enum
 {
-  op_add,
-  op_addc,
-  op_sub,
-  op_subc,
-  op_mul
-} Operations;
+  OP_ADD,
+  OP_ADDC,
+  OP_SUB,
+  OP_SUBC,
+  OP_MUL
+} Operation;
+
+int test (Operation OP, Matrix *m1, Matrix *m2, Matrix *res) {
+  Matrix *m3;
+  int free_m3 = 0;
+  int ok = 0;
+
+  // Operation
+  switch (OP) {
+    case OP_ADD:
+      add (m1, m2);
+      m3 = m1;
+      break;
+    case OP_ADDC:
+      m3 = addc (m1, m2);
+      free_m3 = 1;
+      break;
+    case OP_SUB:
+      sub (m1, m2);
+      m3 = m1;
+      break;
+    case OP_SUBC:
+      m3 = subc (m1, m2);
+      free_m3 = 1;
+      break;
+    case OP_MUL:
+      m3 = mul (m1, m2);
+      free_m3 =1;
+      break;
+  }
+
+  // Check result
+  if (equals(res, m3)) {
+    ok = 1;
+  }
+
+  // Free memory from result if necessary
+  if (free_m3 == 1) {
+    free(m3);
+  }
+
+  return ok;
+}
 
 int main ()
 {
@@ -48,41 +90,42 @@ int main ()
   };
 
   // Initialization of matrices
-  init (&m1, m1t1_mat, 5, 4);
-  init (&m2, m2t1_mat, 5, 4);
-  init (&res_add, res_t1_add_mat, 5, 4);
+  init (&m1, 5, 4, m1_t1_mat);
+  init (&m2, 5, 4, m2_t1_mat);
+  init (&res_add, 5, 4, res_t1_add_mat);
+  init (&res_sub, 5, 4, res_t1_sub_mat);
 
   // Test 1
   // Operation add
-  if (test (op_add, m1, m2, res_add) == 1) {
-    printf ("add test 1 passed\n", );
+  if (test (OP_ADD, m1, m2, res_add) == 1) {
+    printf ("add test 1 passed\n");
   }
   else {
-    printf ("add test 1 failed\n", );
+    printf ("add test 1 failed\n");
   }
 
   // Operation addc
-  if (test (op_addc, m1, m2, res_add) == 1) {
-    printf ("addc test 1 passed\n", );
+  if (test (OP_ADDC, m1, m2, res_add) == 1) {
+    printf ("addc test 1 passed\n");
   }
   else {
-    printf ("addc test 1 failed\n", );
+    printf ("addc test 1 failed\n");
   }
 
   // Operation sub
-  if (test (op_sub, m1, m2, res_sub) == 1) {
-    printf ("sub test 1 passed\n", );
+  if (test (OP_SUB, m1, m2, res_sub) == 1) {
+    printf ("sub test 1 passed\n");
   }
   else {
-    printf ("sub test 1 failed\n", );
+    printf ("sub test 1 failed\n");
   }
 
   // Operation subc
-  if (test (op_subc, m1, m2, res_sub) == 1) {
-    printf ("subc test 1 passed\n", );
+  if (test (OP_SUBC, m1, m2, res_sub) == 1) {
+    printf ("subc test 1 passed\n");
   }
   else {
-    printf ("subc test 1 failed\n", );
+    printf ("subc test 1 failed\n");
   }
 
   del (m1);
@@ -91,47 +134,4 @@ int main ()
   del (res_sub);
 
   return 0;
-}
-
-int test (Operations op, Matrix *m1, Matrix *m2, Matrix *res) {
-  Matrix *m3;
-  int free_m3 = 0;
-  int ok = 0;
-
-  // Operation
-  switch (op) {
-    case op_add:
-      add (m1, m2);
-      m3 = m1;
-      break;
-    case op_addc:
-      m3 = addc (m1, m2);
-      free_m3 = 1;
-      break;
-    case op_sub:
-      sub (m1, m2);
-      m3 = m1;
-      break;
-    case op_subc:
-      m3 = subc (m1, m2);
-      free_m3 = 1;
-      break;
-    case op_mul:
-      m3 = mul (m1, m2);
-      free_m3 =1;
-      break;
-  }
-
-
-  // Check result
-  if (equals(res, m3)) {
-    ok = 1;
-  }
-
-  // Free memory from result if necessary
-  if (free_m3 == 1) {
-    free(m3);
-  }
-
-  return ok;
 }

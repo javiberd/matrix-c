@@ -8,18 +8,12 @@
 typedef struct _Matrix Matrix;
 
 /**
-  Initiliazes a rows * cols matrix
-*/
-void    init   (Matrix **matrix,
-                int      rows,
-                int      cols);
-/**
   Initiliazes a rows * cols matrix, mat is copied into the new matrix
 */
 void    init  (Matrix **matrix,
-                int    **mat,
-                int      rows,
-                int      cols);
+                int     rows,
+                int     cols,
+                int     mat[rows][cols]);
 
 /**
   Sets value of position (i, j) of the matrix to the parameter 'value'
@@ -39,7 +33,7 @@ int     get    (Matrix *matrix,
   Adds matrix_2 to matrix_1, result is saved in matrix_1
 */
 void    add    (Matrix *matrix_1,
-                Matrix *matrix_2)
+                Matrix *matrix_2);
 
 /**
   Adds matrix_2 to matrix_1, result is returned
