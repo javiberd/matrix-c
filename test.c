@@ -176,6 +176,7 @@ int main ()
   del (m2);
   del (res_add);
   del (res_sub);
-
+  del (res_mul);
+  
   return 0;
 }
