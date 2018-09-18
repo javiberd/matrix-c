@@ -74,6 +74,22 @@ int main ()
     {7, 6, 5, 4},
     {3, 2, 1, 0}
   };
+  int t1_mul_mat1[3][4] = {
+    {1, 2, 3, 4},
+    {5, 6, 7, 8},
+    {9, 10, 11, 0}
+  };
+  int t1_mul_mat2[4][2] = {
+    {12, 11},
+    {9, 8},
+    {6, 5},
+    {3, 2}
+  };
+  int t1_mul_res_mat[3][2] = {
+    {60, 50},
+    {180, 154},
+    {264, 234}
+  };
   int res_t1_add_mat[5][4] = {
     {19, 19, 19, 19},
     {19, 19, 19, 19},
@@ -89,14 +105,18 @@ int main ()
     {13, 15, 17, 19}
   };
 
-  // Initialization of matrices
-  init (&m1, 5, 4, m1_t1_mat);
-  init (&m2, 5, 4, m2_t1_mat);
+
+  // Initialization of matrices that contain expected results
   init (&res_add, 5, 4, res_t1_add_mat);
   init (&res_sub, 5, 4, res_t1_sub_mat);
+  init (&res_mul, 3, 2, t1_mul_res_mat);
 
   // Test 1
   // Operation add
+  // Initialization of matrices
+  init (&m1, 5, 4, m1_t1_mat);
+  init (&m2, 5, 4, m2_t1_mat);
+  // Execution of operation
   if (test (OP_ADD, m1, m2, res_add) == 1) {
     printf ("add test 1 passed\n");
   }
@@ -105,8 +125,10 @@ int main ()
   }
 
   // Operation addc
-  // Reinitialize matrix 1 because it has changed after last operation
+  // Initialization of matrices
   init (&m1, 5, 4, m1_t1_mat);
+  init (&m2, 5, 4, m2_t1_mat);
+  // Execution of operation
   if (test (OP_ADDC, m1, m2, res_add) == 1) {
     printf ("addc test 1 passed\n");
   }
@@ -115,6 +137,10 @@ int main ()
   }
 
   // Operation sub
+  // Initialization of matrices
+  init (&m1, 5, 4, m1_t1_mat);
+  init (&m2, 5, 4, m2_t1_mat);
+  // Execution of operation
   if (test (OP_SUB, m1, m2, res_sub) == 1) {
     printf ("sub test 1 passed\n");
   }
@@ -123,13 +149,27 @@ int main ()
   }
 
   // Operation subc
-  // Reinitialize matrix 1 because it has changed after last operation
+  // Initialization of matrices
   init (&m1, 5, 4, m1_t1_mat);
+  init (&m2, 5, 4, m2_t1_mat);
+  // Execution of operation
   if (test (OP_SUBC, m1, m2, res_sub) == 1) {
     printf ("subc test 1 passed\n");
   }
   else {
     printf ("subc test 1 failed\n");
+  }
+
+  // Operation mul
+  // Initialization of matrices
+  init (&m1, 3, 4, t1_mul_mat1);
+  init (&m2, 4, 2, t1_mul_mat2);
+  // Execution of operation
+  if (test (OP_MUL, m1, m2, res_mul) == 1) {
+    printf ("mul test 1 passed\n");
+  }
+  else {
+    printf ("mul test 1 failed\n");
   }
 
   del (m1);

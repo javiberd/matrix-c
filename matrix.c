@@ -15,7 +15,7 @@ struct _Matrix
   int** mat;
 };
 
-void init (Matrix **matrix, int rows, int cols, int mat[rows][cols])
+void init (Matrix **matrix, int rows, int cols, const int mat[rows][cols])
 {
   (*matrix) = (Matrix *) malloc (sizeof (Matrix));
   (*matrix)->rows = rows;
@@ -39,12 +39,12 @@ void set (Matrix *matrix, int i, int j, int value)
   matrix->mat[i][j] = value;
 }
 
-int get (Matrix *matrix, int i, int j)
+int get (const Matrix *matrix, int i, int j)
 {
   return matrix->mat[i][j];
 }
 
-void add (Matrix *matrix_1, Matrix *matrix_2)
+void add (Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
@@ -55,7 +55,7 @@ void add (Matrix *matrix_1, Matrix *matrix_2)
   }
 }
 
-Matrix *addc (Matrix *matrix_1, Matrix *matrix_2)
+Matrix *addc (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
@@ -69,7 +69,7 @@ Matrix *addc (Matrix *matrix_1, Matrix *matrix_2)
   return res;
 }
 
-void sub (Matrix *matrix_1, Matrix *matrix_2)
+void sub (Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
@@ -80,7 +80,7 @@ void sub (Matrix *matrix_1, Matrix *matrix_2)
   }
 }
 
-Matrix *subc (Matrix *matrix_1, Matrix *matrix_2)
+Matrix *subc (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
@@ -94,7 +94,7 @@ Matrix *subc (Matrix *matrix_1, Matrix *matrix_2)
   return res;
 }
 
-Matrix *mul (Matrix *matrix_1, Matrix *matrix_2)
+Matrix *mul (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j, k;
   int rows1 = matrix_1->rows, cols1 = matrix_1->cols, cols2 = matrix_2->cols;
@@ -115,7 +115,7 @@ Matrix *mul (Matrix *matrix_1, Matrix *matrix_2)
   return res;
 }
 
-int equals (Matrix *matrix_1, Matrix *matrix_2)
+int equals (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
@@ -129,7 +129,7 @@ int equals (Matrix *matrix_1, Matrix *matrix_2)
   return 1;
 }
 
-char *str (Matrix *matrix)
+char *str (const Matrix *matrix)
 {
   int i, j;
   int rows = matrix->rows, cols = matrix->cols;
