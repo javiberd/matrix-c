@@ -11,47 +11,47 @@ typedef struct _Matrix Matrix;
   Initiliazes a rows * cols matrix, mat is copied into the new matrix. If mat
   is NULL then new matrix will be filled with 0's
 */
-void    init  (Matrix **matrix,
-               int     rows,
-               int     cols,
+void    init  (Matrix      **matrix,
+               int           rows,
+               int           cols,
                const int     mat[rows][cols]);
 
 /**
   Sets value of position (i, j) of the matrix to the parameter 'value'
 */
-void    set    (Matrix *matrix,
-                int     i,
-                int     j,
-                int     value);
+void    set    (Matrix       *matrix,
+                int           i,
+                int           j,
+                int           value);
 
 /**
   Returns value of position (i, j) of the matrix
 */
 int     get    (const Matrix *matrix,
-                int     i,
-                int     j);
+                int           i,
+                int           j);
 /**
   Adds matrix_2 to matrix_1, result is saved in matrix_1
 */
-void    add    (Matrix *matrix_1,
+void    add    (Matrix       *matrix_1,
                 const Matrix *matrix_2);
 
 /**
   Adds matrix_2 to matrix_1, result is returned
 */
-Matrix *addc   (const Matrix *matrix_1,
+Matrix *addr   (const Matrix *matrix_1,
                 const Matrix *matrix_2);
 
 /**
   Subtracts matrix_2 to matrix_1, result is saved in matrix_1
 */
-void    sub    (Matrix *matrix_1,
+void    sub    (Matrix       *matrix_1,
                 const Matrix *matrix_2);
 
 /**
   Subtracts matrix_2 to matrix_1, result is returned
 */
-Matrix *subc   (const Matrix *matrix_1,
+Matrix *subr   (const Matrix *matrix_1,
                 const Matrix *matrix_2);
 
 /**
@@ -76,6 +76,6 @@ char   *str    (const Matrix *matrix);
 /**
   Frees all memory allocated
 */
-void    del    (Matrix *matrix);
+void    del    (Matrix       *matrix);
 
 #endif

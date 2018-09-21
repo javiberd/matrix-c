@@ -9,9 +9,9 @@
 typedef enum
 {
   OP_ADD,
-  OP_ADDC,
+  OP_ADDR,
   OP_SUB,
-  OP_SUBC,
+  OP_SUBR,
   OP_MUL
 } Operation;
 
@@ -26,16 +26,16 @@ int test (Operation OP, Matrix *m1, Matrix *m2, Matrix *res) {
       add (m1, m2);
       m3 = m1;
       break;
-    case OP_ADDC:
-      m3 = addc (m1, m2);
+    case OP_ADDR:
+      m3 = addr (m1, m2);
       free_m3 = 1;
       break;
     case OP_SUB:
       sub (m1, m2);
       m3 = m1;
       break;
-    case OP_SUBC:
-      m3 = subc (m1, m2);
+    case OP_SUBR:
+      m3 = subr (m1, m2);
       free_m3 = 1;
       break;
     case OP_MUL:
@@ -129,11 +129,11 @@ int main ()
   init (&m1, 5, 4, m1_t1_mat);
   init (&m2, 5, 4, m2_t1_mat);
   // Execution of operation
-  if (test (OP_ADDC, m1, m2, res_add) == 1) {
-    printf ("addc test 1 passed\n");
+  if (test (OP_ADDR, m1, m2, res_add) == 1) {
+    printf ("addr test 1 passed\n");
   }
   else {
-    printf ("addc test 1 failed\n");
+    printf ("addr test 1 failed\n");
   }
 
   // Operation sub
@@ -153,11 +153,11 @@ int main ()
   init (&m1, 5, 4, m1_t1_mat);
   init (&m2, 5, 4, m2_t1_mat);
   // Execution of operation
-  if (test (OP_SUBC, m1, m2, res_sub) == 1) {
-    printf ("subc test 1 passed\n");
+  if (test (OP_SUBR, m1, m2, res_sub) == 1) {
+    printf ("subr test 1 passed\n");
   }
   else {
-    printf ("subc test 1 failed\n");
+    printf ("subr test 1 failed\n");
   }
 
   // Operation mul
@@ -177,6 +177,6 @@ int main ()
   del (res_add);
   del (res_sub);
   del (res_mul);
-  
+
   return 0;
 }
