@@ -55,7 +55,7 @@ void add (Matrix *matrix_1, const Matrix *matrix_2)
   }
 }
 
-Matrix *addc (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *addr (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
@@ -80,7 +80,7 @@ void sub (Matrix *matrix_1, const Matrix *matrix_2)
   }
 }
 
-Matrix *subc (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *subr (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j;
   int rows = matrix_1->rows, cols = matrix_1->cols;
