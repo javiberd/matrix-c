@@ -33,7 +33,7 @@ int     get    (const Matrix *matrix,
 /**
   Adds matrix_2 to matrix_1, result is saved in matrix_1
 */
-void    add    (Matrix       *matrix_1,
+Matrix *add    (Matrix       *matrix_1,
                 const Matrix *matrix_2);
 
 /**
@@ -45,7 +45,7 @@ Matrix *addr   (const Matrix *matrix_1,
 /**
   Subtracts matrix_2 to matrix_1, result is saved in matrix_1
 */
-void    sub    (Matrix       *matrix_1,
+Matrix *sub    (Matrix       *matrix_1,
                 const Matrix *matrix_2);
 
 /**
