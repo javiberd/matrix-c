@@ -11,8 +11,7 @@ typedef struct _Matrix Matrix;
   Initiliazes a rows * cols matrix, mat is copied into the new matrix. If mat
   is NULL then new matrix will be filled with 0's
 */
-void    init  (Matrix      **matrix,
-               int           rows,
+Matrix *init  (int           rows,
                int           cols,
                const int     mat[rows][cols]);
 

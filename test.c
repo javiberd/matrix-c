@@ -75,9 +75,9 @@ void test_mul () {
   Matrix *m1, *m2, *res;
 
   // Initialization of matrices
-  init (&m1, 3, 4, t1_mul_mat1);
-  init (&m2, 4, 2, t1_mul_mat2);
-  init (&res, 3, 2, t1_mul_res_mat);
+  m1 = init (3, 4, t1_mul_mat1);
+  m2 = init (4, 2, t1_mul_mat2);
+  res = init (3, 2, t1_mul_res_mat);
 
   // Execution of operation
   if (test (OP_MUL, m1, m2, res) == 1) {
@@ -117,9 +117,9 @@ void test_add () {
   Matrix *m1, *m2, *res;
 
   // Initialization of matrices
-  init (&m1, 5, 4, t1_add_mat1);
-  init (&m2, 5, 4, t1_add_mat2);
-  init (&res, 5, 4, t1_add_res_mat);
+  m1 = init (5, 4, t1_add_mat1);
+  m2 = init (5, 4, t1_add_mat2);
+  res = init (5, 4, t1_add_res_mat);
 
   // Execution of operation addr
   if (test (OP_ADDR, m1, m2, res) == 1) {
@@ -167,9 +167,9 @@ void test_sub () {
   Matrix *m1, *m2, *res;
 
   // Initialization of matrices
-  init (&m1, 5, 4, t1_sub_mat1);
-  init (&m2, 5, 4, t1_sub_mat2);
-  init (&res, 5, 4, t1_sub_res_mat);
+  m1 = init (5, 4, t1_sub_mat1);
+  m2 = init (5, 4, t1_sub_mat2);
+  res = init (5, 4, t1_sub_res_mat);
 
   // Execution of operation subr
   if (test (OP_SUBR, m1, m2, res) == 1) {
