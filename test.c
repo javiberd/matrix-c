@@ -23,16 +23,14 @@ int test (Operation OP, Matrix *m1, Matrix *m2, Matrix *res) {
   // Operation
   switch (OP) {
     case OP_ADD:
-      add (m1, m2);
-      m3 = m1;
+      m3 = add (m1, m2);
       break;
     case OP_ADDR:
       m3 = addr (m1, m2);
       free_m3 = 1;
       break;
     case OP_SUB:
-      sub (m1, m2);
-      m3 = m1;
+      m3 = sub (m1, m2);
       break;
     case OP_SUBR:
       m3 = subr (m1, m2);
