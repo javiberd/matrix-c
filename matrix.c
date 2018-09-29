@@ -118,7 +118,7 @@ Matrix *subr (const Matrix *matrix_1, const Matrix *matrix_2)
 
 Matrix *mul (const Matrix *matrix_1, const Matrix *matrix_2)
 {
-  int rows1 = matrix_1->rows, cols1 = matrix_1->cols, rows2 = matrix_1->rows,
+  int rows1 = matrix_1->rows, cols1 = matrix_1->cols, rows2 = matrix_2->rows,
     cols2 = matrix_2->cols;
 
   if (cols1 != rows2) {
