@@ -10,23 +10,23 @@
 
 struct _Matrix
 {
-  int rows;
-  int cols;
+  int nrow;
+  int ncol;
   int** mat;
 };
 
-Matrix *init (int rows, int cols, const int mat[rows][cols])
+Matrix *init (int nrow, int ncol, const int mat[nrow][ncol])
 {
   Matrix *matrix = (Matrix *) malloc (sizeof (Matrix));
   if (matrix == NULL) {
     return NULL;
   }
-  matrix->rows = rows;
-  matrix->cols = cols;
-  matrix->mat = (int**) malloc (sizeof (int *) * rows);
-  for (int i = 0; i < rows; i++) {
-    matrix->mat[i] = (int*) malloc (sizeof (int) * cols);
-    for (int j = 0; j < cols; j++) {
+  matrix->nrow = nrow;
+  matrix->ncol = ncol;
+  matrix->mat = (int**) malloc (sizeof (int *) * nrow);
+  for (int i = 0; i < nrow; i++) {
+    matrix->mat[i] = (int*) malloc (sizeof (int) * ncol);
+    for (int j = 0; j < ncol; j++) {
       if (mat != NULL) {
         matrix->mat[i][j] = mat[i][j];
       }
@@ -50,34 +50,34 @@ int get (const Matrix *matrix, int i, int j)
 
 Matrix *add (Matrix *matrix_1, const Matrix *matrix_2)
 {
-  int rows = matrix_1->rows, cols = matrix_1->cols;
+  int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
-  if (rows != matrix_2->rows || cols != matrix_2->cols) {
+  if (nrow != matrix_2->nrow || ncol != matrix_2->ncol) {
     return NULL;
   }
 
   int i, j;
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
+  for (i = 0; i < nrow; i++) {
+    for (j = 0; j < ncol; j++) {
       matrix_1->mat[i][j] = matrix_1->mat[i][j] + matrix_2->mat[i][j];
     }
   }
   return matrix_1;
 }
 
-Matrix *addr (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *addn (const Matrix *matrix_1, const Matrix *matrix_2)
 {
-  int rows = matrix_1->rows, cols = matrix_1->cols;
+  int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
-  if (rows != matrix_2->rows || cols != matrix_2->cols) {
+  if (nrow != matrix_2->nrow || ncol != matrix_2->ncol) {
     return NULL;
   }
 
   int i, j;
   Matrix *res;
-  res = init (rows, cols, NULL);
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
+  res = init (nrow, ncol, NULL);
+  for (i = 0; i < nrow; i++) {
+    for (j = 0; j < ncol; j++) {
       res->mat[i][j] = matrix_1->mat[i][j] + matrix_2->mat[i][j];
     }
   }
@@ -86,60 +86,96 @@ Matrix *addr (const Matrix *matrix_1, const Matrix *matrix_2)
 
 Matrix *sub (Matrix *matrix_1, const Matrix *matrix_2)
 {
-  int rows = matrix_1->rows, cols = matrix_1->cols;
+  int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
-  if (rows != matrix_2->rows || cols != matrix_2->cols) {
+  if (nrow != matrix_2->nrow || ncol != matrix_2->ncol) {
     return NULL;
   }
 
   int i, j;
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
+  for (i = 0; i < nrow; i++) {
+    for (j = 0; j < ncol; j++) {
       matrix_1->mat[i][j] = matrix_1->mat[i][j] - matrix_2->mat[i][j];
     }
   }
   return matrix_1;
 }
 
-Matrix *subr (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *subn (const Matrix *matrix_1, const Matrix *matrix_2)
 {
-  int rows = matrix_1->rows, cols = matrix_1->cols;
+  int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
-  if (rows != matrix_2->rows || cols != matrix_2->cols) {
+  if (nrow != matrix_2->nrow || ncol != matrix_2->ncol) {
     return NULL;
   }
 
   int i, j;
   Matrix *res;
-  res = init (rows, cols, NULL);
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
+  res = init (nrow, ncol, NULL);
+  for (i = 0; i < nrow; i++) {
+    for (j = 0; j < ncol; j++) {
       res->mat[i][j] = matrix_1->mat[i][j] - matrix_2->mat[i][j];
     }
   }
   return res;
 }
 
-Matrix *mul (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *mul (Matrix *matrix_1, const Matrix *matrix_2)
 {
-  int rows1 = matrix_1->rows, cols1 = matrix_1->cols, rows2 = matrix_2->rows,
-    cols2 = matrix_2->cols;
+  int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
-  if (cols1 != rows2) {
+  if (nrow != matrix_2->nrow || ncol != matrix_2->ncol) {
+    return NULL;
+  }
+
+  int i, j;
+  for (i = 0; i < nrow; i++) {
+    for (j = 0; j < ncol; j++) {
+      matrix_1->mat[i][j] = matrix_1->mat[i][j] * matrix_2->mat[i][j];
+    }
+  }
+  return matrix_1;
+}
+
+Matrix *muln (const Matrix *matrix_1, const Matrix *matrix_2)
+{
+  int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
+
+  if (nrow != matrix_2->nrow || ncol != matrix_2->ncol) {
+    return NULL;
+  }
+
+  int i, j;
+  Matrix *res;
+  res = init (nrow, ncol, NULL);
+  for (i = 0; i < nrow; i++) {
+    for (j = 0; j < ncol; j++) {
+      res->mat[i][j] = matrix_1->mat[i][j] * matrix_2->mat[i][j];
+    }
+  }
+  return res;
+}
+
+Matrix *mulp (const Matrix *matrix_1, const Matrix *matrix_2)
+{
+  int nrow1 = matrix_1->nrow, ncol1 = matrix_1->ncol, nrow2 = matrix_2->nrow,
+    ncol2 = matrix_2->ncol;
+
+  if (ncol1 != nrow2) {
     return NULL;
   }
 
   int i, j, k;
   Matrix *res;
   int **mat_1, **mat_2, **res_mat;
-  res = init (rows1, cols2, NULL);
+  res = init (nrow1, ncol2, NULL);
   mat_1 = matrix_1->mat;
   mat_2 = matrix_2->mat;
   res_mat = res->mat;
-  for (i = 0; i < rows1; i++) {
-    for (j = 0; j < cols2; j++) {
+  for (i = 0; i < nrow1; i++) {
+    for (j = 0; j < ncol2; j++) {
         res_mat[i][j] = 0;
-      for (k = 0; k < cols1; k++) {
+      for (k = 0; k < ncol1; k++) {
         res_mat[i][j] += mat_1[i][k] * mat_2[k][j];
       }
     }
@@ -150,9 +186,9 @@ Matrix *mul (const Matrix *matrix_1, const Matrix *matrix_2)
 int equals (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j;
-  int rows = matrix_1->rows, cols = matrix_1->cols;
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
+  int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
+  for (i = 0; i < nrow; i++) {
+    for (j = 0; j < ncol; j++) {
       if (matrix_1->mat[i][j] != matrix_2->mat[i][j]) {
         return 0;
       }
@@ -164,11 +200,11 @@ int equals (const Matrix *matrix_1, const Matrix *matrix_2)
 char *str (const Matrix *matrix)
 {
   int i, j;
-  int rows = matrix->rows, cols = matrix->cols;
-  char *out = (char *) malloc (sizeof (char) * rows * cols);
+  int nrow = matrix->nrow, ncol = matrix->ncol;
+  char *out = (char *) malloc (sizeof (char) * nrow * ncol);
   char aux[10];
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
+  for (i = 0; i < nrow; i++) {
+    for (j = 0; j < ncol; j++) {
       sprintf (aux, "%i", matrix->mat[i][j]);
       strcat (out, aux);
     }
@@ -177,10 +213,20 @@ char *str (const Matrix *matrix)
   return out;
 }
 
+int get_nrow (const Matrix *matrix)
+{
+  return matrix->nrow;
+}
+
+int get_ncol (const Matrix *matrix)
+{
+  return matrix->ncol;
+}
+
 void del (Matrix *matrix)
 {
-  int i, rows = matrix->rows;
-  for (i = 0; i < rows; i++) {
+  int i, nrow = matrix->nrow;
+  for (i = 0; i < nrow; i++) {
     free (matrix->mat[i]);
   }
   free (matrix->mat);

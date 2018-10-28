@@ -9,10 +9,12 @@
 typedef enum
 {
   OP_ADD,
-  OP_ADDR,
+  OP_ADDN,
   OP_SUB,
-  OP_SUBR,
-  OP_MUL
+  OP_SUBN,
+  OP_MUL,
+  OP_MULN,
+  OP_MULP,
 } Operation;
 
 int test (Operation OP, Matrix *m1, Matrix *m2, Matrix *res) {
@@ -25,19 +27,25 @@ int test (Operation OP, Matrix *m1, Matrix *m2, Matrix *res) {
     case OP_ADD:
       m3 = add (m1, m2);
       break;
-    case OP_ADDR:
-      m3 = addr (m1, m2);
+    case OP_ADDN:
+      m3 = addn (m1, m2);
       free_m3 = 1;
       break;
     case OP_SUB:
       m3 = sub (m1, m2);
       break;
-    case OP_SUBR:
-      m3 = subr (m1, m2);
+    case OP_SUBN:
+      m3 = subn (m1, m2);
       free_m3 = 1;
       break;
     case OP_MUL:
       m3 = mul (m1, m2);
+      break;
+    case OP_MULN:
+      m3 = muln (m1, m2);
+      break;
+    case OP_MULP:
+      m3 = mulp (m1, m2);
       free_m3 =1;
       break;
   }
@@ -53,43 +61,6 @@ int test (Operation OP, Matrix *m1, Matrix *m2, Matrix *res) {
   }
 
   return ok;
-}
-
-void test_mul () {
-  int t1_mul_mat1[3][4] = {
-    {1, 2, 3, 4},
-    {5, 6, 7, 8},
-    {9, 10, 11, 0}
-  };
-  int t1_mul_mat2[4][2] = {
-    {12, 11},
-    {9, 8},
-    {6, 5},
-    {3, 2}
-  };
-  int t1_mul_res_mat[3][2] = {
-    {60, 50},
-    {180, 154},
-    {264, 234}
-  };
-  Matrix *m1, *m2, *res;
-
-  // Initialization of matrices
-  m1 = init (3, 4, t1_mul_mat1);
-  m2 = init (4, 2, t1_mul_mat2);
-  res = init (3, 2, t1_mul_res_mat);
-
-  // Execution of operation
-  if (test (OP_MUL, m1, m2, res) == 1) {
-    printf ("mul test 1: passed\n");
-  }
-  else {
-    printf ("mul test 1: failed\n");
-  }
-
-  del (m1);
-  del (m2);
-  del (res);
 }
 
 void test_add () {
@@ -121,12 +92,12 @@ void test_add () {
   m2 = init (5, 4, t1_add_mat2);
   res = init (5, 4, t1_add_res_mat);
 
-  // Execution of operation addr
-  if (test (OP_ADDR, m1, m2, res) == 1) {
-    printf ("addr test 1: passed\n");
+  // Execution of operation addn
+  if (test (OP_ADDN, m1, m2, res) == 1) {
+    printf ("addn test 1: passed\n");
   }
   else {
-    printf ("addr test 1: failed\n");
+    printf ("addn test 1: failed\n");
   }
 
   // Execution of operation add
@@ -171,12 +142,12 @@ void test_sub () {
   m2 = init (5, 4, t1_sub_mat2);
   res = init (5, 4, t1_sub_res_mat);
 
-  // Execution of operation subr
-  if (test (OP_SUBR, m1, m2, res) == 1) {
-    printf ("subr test 1: passed\n");
+  // Execution of operation subn
+  if (test (OP_SUBN, m1, m2, res) == 1) {
+    printf ("subn test 1: passed\n");
   }
   else {
-    printf ("subr test 1: failed\n");
+    printf ("subn test 1: failed\n");
   }
 
   // Execution of operation sub
@@ -192,10 +163,98 @@ void test_sub () {
   del (res);
 }
 
+void test_mul () {
+  int t1_mul_mat1[5][4] = {
+    {0, 1, 2, 3},
+    {4, 5, 6, 7},
+    {8, 9, 10, 11},
+    {12, 13, 14, 15},
+    {16, 17, 18, 19}
+  };
+  int t1_mul_mat2[5][4] = {
+    {19, 18, 17, 16},
+    {15, 14, 13, 12},
+    {11, 10, 9, 8},
+    {7, 6, 5, 4},
+    {3, 2, 1, 0}
+  };
+  int t1_mul_res_mat[5][4] = {
+    {0, 18, 34, 48},
+    {60, 70, 78, 84},
+    {88, 90, 90, 88},
+    {84, 78, 70, 60},
+    {48, 34, 18, 0}
+  };
+  Matrix *m1, *m2, *res;
+
+  // Initialization of matrices
+  m1 = init (5, 4, t1_mul_mat1);
+  m2 = init (5, 4, t1_mul_mat2);
+  res = init (5, 4, t1_mul_res_mat);
+
+  // Execution of operation muln
+  if (test (OP_MULN, m1, m2, res) == 1) {
+    printf ("muln test 1: passed\n");
+  }
+  else {
+    printf ("muln test 1: failed\n");
+  }
+
+  // Execution of operation mul
+  if (test (OP_MUL, m1, m2, res) == 1) {
+    printf ("mul test 1: passed\n");
+  }
+  else {
+    printf ("mul test 1: failed\n");
+  }
+
+  del (m1);
+  del (m2);
+  del (res);
+}
+
+void test_mulp () {
+  int t1_mulp_mat1[3][4] = {
+    {1, 2, 3, 4},
+    {5, 6, 7, 8},
+    {9, 10, 11, 0}
+  };
+  int t1_mulp_mat2[4][2] = {
+    {12, 11},
+    {9, 8},
+    {6, 5},
+    {3, 2}
+  };
+  int t1_mulp_res_mat[3][2] = {
+    {60, 50},
+    {180, 154},
+    {264, 234}
+  };
+  Matrix *m1, *m2, *res;
+
+  // Initialization of matrices
+  m1 = init (3, 4, t1_mulp_mat1);
+  m2 = init (4, 2, t1_mulp_mat2);
+  res = init (3, 2, t1_mulp_res_mat);
+
+  // Execution of operation
+  if (test (OP_MULP, m1, m2, res) == 1) {
+    printf ("mulp test 1: passed\n");
+  }
+  else {
+    printf ("mulp test 1: failed\n");
+  }
+
+  del (m1);
+  del (m2);
+  del (res);
+}
+
 int main ()
 {
-  test_add();
-  test_sub();
-  test_mul();
+  test_add ();
+  test_sub ();
+  test_mul ();
+  test_mulp ();
   return 0;
 }
