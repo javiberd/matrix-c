@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "matrix.h"
+#include "../src/matrix.h"
 
 typedef enum
 {
