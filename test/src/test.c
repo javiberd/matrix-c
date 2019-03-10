@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../src/matrix.h"
+#include "../../src/matrix.h"
 
 typedef enum
 {
@@ -43,6 +43,7 @@ int test (Operation OP, Matrix *m1, Matrix *m2, Matrix *res) {
       break;
     case OP_MULN:
       m3 = muln (m1, m2);
+      free_m3 =1;
       break;
     case OP_MULP:
       m3 = mulp (m1, m2);
@@ -57,7 +58,7 @@ int test (Operation OP, Matrix *m1, Matrix *m2, Matrix *res) {
 
   // Free memory from result if necessary
   if (free_m3 == 1) {
-    free(m3);
+    del (m3);
   }
 
   return ok;
