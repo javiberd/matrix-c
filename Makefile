@@ -1,8 +1,8 @@
 # Description: Simple makefile for compiling the library.
 # Author: Javier Berdecio Trigueros
 
-CC			=	gcc
-CFLAGS  = -Wall
+CC = gcc
+CFLAGS = -Wall
 
 all: obj/matrix.o
 

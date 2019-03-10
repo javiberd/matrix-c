@@ -4,8 +4,8 @@
 
 PROGRAM = matrix_test
 
-CC			=	gcc
-CFLAGS  = -Wall
+CC = gcc
+CFLAGS = -Wall
 LDFLAGS =
 
 all: $(PROGRAM)
