@@ -201,11 +201,19 @@ char *str (const Matrix *matrix)
 {
   int i, j;
   int nrow = matrix->nrow, ncol = matrix->ncol;
-  char *out = (char *) malloc (sizeof (char) * nrow * ncol);
-  char aux[10];
+  // Note that 11 is the largest int length (in characters) plus sign
+  char *out = (char *) malloc (sizeof (char) * nrow * ncol * 11);
+  char aux[11];
   for (i = 0; i < nrow; i++) {
     for (j = 0; j < ncol; j++) {
-      sprintf (aux, "%i", matrix->mat[i][j]);
+      if (j < ncol - 1) {
+        // Write element with an appended space
+        sprintf (aux, "%i ", matrix->mat[i][j]);
+      }
+      else {
+        // Last element of the row does not write an extra space
+        sprintf (aux, "%i", matrix->mat[i][j]);
+      }
       strcat (out, aux);
     }
     strcat (out, "\n");
