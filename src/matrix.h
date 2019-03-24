@@ -1,4 +1,8 @@
 /**
+  @file matrix.h
+
+  This is something
+
   Author: Javier Berdecio Trigueros
 */
 
@@ -11,8 +15,8 @@ typedef struct _Matrix Matrix;
   Initiliazes a rows * cols matrix, mat is copied into the new matrix. If mat
   is NULL then new matrix will be filled with 0's.
 
-  @param rows   Number of rows that the new matrix will have.
-  @param cols   Number of columns that the new matrix will have.
+  @param nrow   Number of rows that the new matrix will have.
+  @param ncol   Number of columns that the new matrix will have.
   @param mat    Matrix with the values to be copied into the new matrix. If
                 NULL, matrix will be filled with 0's.
   @return       A new matrix, or NULL if it was not possible to allocate memory.
