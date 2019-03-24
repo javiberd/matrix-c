@@ -77,7 +77,7 @@ Matrix *Matrix_addn (const Matrix *matrix_1, const Matrix *matrix_2)
 
   int i, j;
   Matrix *res;
-  res = init (nrow, ncol, NULL);
+  res = Matrix_init (nrow, ncol, NULL);
   for (i = 0; i < nrow; i++) {
     for (j = 0; j < ncol; j++) {
       res->mat[i][j] = matrix_1->mat[i][j] + matrix_2->mat[i][j];
@@ -113,7 +113,7 @@ Matrix *Matrix_subn (const Matrix *matrix_1, const Matrix *matrix_2)
 
   int i, j;
   Matrix *res;
-  res = init (nrow, ncol, NULL);
+  res = Matrix_init (nrow, ncol, NULL);
   for (i = 0; i < nrow; i++) {
     for (j = 0; j < ncol; j++) {
       res->mat[i][j] = matrix_1->mat[i][j] - matrix_2->mat[i][j];
@@ -149,7 +149,7 @@ Matrix *Matrix_mulrn (const Matrix *matrix_1, const Matrix *matrix_2)
 
   int i, j;
   Matrix *res;
-  res = init (nrow, ncol, NULL);
+  res = Matrix_init (nrow, ncol, NULL);
   for (i = 0; i < nrow; i++) {
     for (j = 0; j < ncol; j++) {
       res->mat[i][j] = matrix_1->mat[i][j] * matrix_2->mat[i][j];
@@ -170,7 +170,7 @@ Matrix *Matrix_muln (const Matrix *matrix_1, const Matrix *matrix_2)
   int i, j, k;
   Matrix *res;
   int **mat_1, **mat_2, **res_mat;
-  res = init (nrow1, ncol2, NULL);
+  res = Matrix_init (nrow1, ncol2, NULL);
   mat_1 = matrix_1->mat;
   mat_2 = matrix_2->mat;
   res_mat = res->mat;
