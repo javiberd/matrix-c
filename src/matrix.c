@@ -1,5 +1,7 @@
 /**
-  Author: Javier Berdecio Trigueros
+  Implementation of functions defined in matrix.h.
+
+  @author Javier Berdecio Trigueros
 */
 
 #include "matrix.h"
@@ -15,7 +17,7 @@ struct _Matrix
   int** mat;
 };
 
-Matrix *init (int nrow, int ncol, const int mat[nrow][ncol])
+Matrix *Matrix_init (int nrow, int ncol, const int mat[nrow][ncol])
 {
   Matrix *matrix = (Matrix *) malloc (sizeof (Matrix));
   if (matrix == NULL) {
@@ -38,17 +40,17 @@ Matrix *init (int nrow, int ncol, const int mat[nrow][ncol])
   return matrix;
 }
 
-void set (Matrix *matrix, int i, int j, int value)
+void Matrix_set (Matrix *matrix, int i, int j, int value)
 {
   matrix->mat[i][j] = value;
 }
 
-int get (const Matrix *matrix, int i, int j)
+int Matrix_get (const Matrix *matrix, int i, int j)
 {
   return matrix->mat[i][j];
 }
 
-Matrix *add (Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *Matrix_add (Matrix *matrix_1, const Matrix *matrix_2)
 {
   int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
@@ -65,7 +67,7 @@ Matrix *add (Matrix *matrix_1, const Matrix *matrix_2)
   return matrix_1;
 }
 
-Matrix *addn (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *Matrix_addn (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
@@ -84,7 +86,7 @@ Matrix *addn (const Matrix *matrix_1, const Matrix *matrix_2)
   return res;
 }
 
-Matrix *sub (Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *Matrix_sub (Matrix *matrix_1, const Matrix *matrix_2)
 {
   int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
@@ -101,7 +103,7 @@ Matrix *sub (Matrix *matrix_1, const Matrix *matrix_2)
   return matrix_1;
 }
 
-Matrix *subn (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *Matrix_subn (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
@@ -120,7 +122,7 @@ Matrix *subn (const Matrix *matrix_1, const Matrix *matrix_2)
   return res;
 }
 
-Matrix *mul (Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *Matrix_mul (Matrix *matrix_1, const Matrix *matrix_2)
 {
   int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
@@ -137,7 +139,7 @@ Matrix *mul (Matrix *matrix_1, const Matrix *matrix_2)
   return matrix_1;
 }
 
-Matrix *muln (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *Matrix_mulrn (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
@@ -156,7 +158,7 @@ Matrix *muln (const Matrix *matrix_1, const Matrix *matrix_2)
   return res;
 }
 
-Matrix *mulp (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *Matrix_muln (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int nrow1 = matrix_1->nrow, ncol1 = matrix_1->ncol, nrow2 = matrix_2->nrow,
     ncol2 = matrix_2->ncol;
@@ -183,7 +185,7 @@ Matrix *mulp (const Matrix *matrix_1, const Matrix *matrix_2)
   return res;
 }
 
-int equals (const Matrix *matrix_1, const Matrix *matrix_2)
+int Matrix_equals (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int i, j;
   int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
@@ -197,7 +199,7 @@ int equals (const Matrix *matrix_1, const Matrix *matrix_2)
   return 1;
 }
 
-char *str (const Matrix *matrix)
+char *Matrix_str (const Matrix *matrix)
 {
   int i, j;
   int nrow = matrix->nrow, ncol = matrix->ncol;
@@ -221,17 +223,17 @@ char *str (const Matrix *matrix)
   return out;
 }
 
-int get_nrow (const Matrix *matrix)
+int Matrix_get_nrow (const Matrix *matrix)
 {
   return matrix->nrow;
 }
 
-int get_ncol (const Matrix *matrix)
+int Matrix_get_ncol (const Matrix *matrix)
 {
   return matrix->ncol;
 }
 
-void del (Matrix *matrix)
+void Matrix_del (Matrix *matrix)
 {
   int i, nrow = matrix->nrow;
   for (i = 0; i < nrow; i++) {
