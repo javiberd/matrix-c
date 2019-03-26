@@ -1,5 +1,5 @@
 /**
-  Implementation of functions defined in matrix.h.
+  Implementation of functions declared in matrix.h.
 
   @author Javier Berdecio Trigueros
 */
@@ -42,11 +42,17 @@ Matrix *Matrix_init (int nrow, int ncol, const int mat[nrow][ncol])
 
 void Matrix_set (Matrix *matrix, int i, int j, int value)
 {
+  if (i >= 0 && i < matrix->nrow && j >= 0 && j < matrix->ncol) {
+
+  }
   matrix->mat[i][j] = value;
 }
 
 int Matrix_get (const Matrix *matrix, int i, int j)
 {
+  if (i >= 0 && i < matrix->nrow && j >= 0 && j < matrix->ncol) {
+
+  }
   return matrix->mat[i][j];
 }
 
