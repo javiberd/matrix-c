@@ -67,7 +67,7 @@ Matrix *Matrix_add (Matrix *matrix_1, const Matrix *matrix_2)
   return matrix_1;
 }
 
-Matrix *Matrix_addn (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *Matrix_addrn (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
@@ -103,7 +103,7 @@ Matrix *Matrix_sub (Matrix *matrix_1, const Matrix *matrix_2)
   return matrix_1;
 }
 
-Matrix *Matrix_subn (const Matrix *matrix_1, const Matrix *matrix_2)
+Matrix *Matrix_subrn (const Matrix *matrix_1, const Matrix *matrix_2)
 {
   int nrow = matrix_1->nrow, ncol = matrix_1->ncol;
 
